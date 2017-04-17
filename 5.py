@@ -11,5 +11,3 @@ for line in unpickled:
     for ch, num in line:
         print(ch*num, end='')
     print('')
-
-
