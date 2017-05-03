@@ -1,4 +1,4 @@
-inString = '''kAewtloYgcFQaJNhHVGxXDiQmzjfcpYbzxlWrVcqsmUbCunkfxZWDZjUZMiGqhRRiUvGmYmvnJIHEmbT
+inStr = '''kAewtloYgcFQaJNhHVGxXDiQmzjfcpYbzxlWrVcqsmUbCunkfxZWDZjUZMiGqhRRiUvGmYmvnJIHEmbT
 MUKLECKdCthezSYBpIElRnZugFAxDRtQPpyeCBgBfaRVvvguRXLvkAdLOeCKxsDUvBBCwdpMMWmuELeG
 ENihrpCLhujoBqPRDPvfzcwadMMMbkmkzCCzoTPfbRlzBqMblmxTxNniNoCufprWXxgHZpldkoLCrHJq
 vYuyJFCZtqXLhWiYzOXeglkzhVJIWmeUySGuFVmLTCyMshQtvZpPwuIbOHNoBauwvuJYCmqznOBgByPw
@@ -1249,3 +1249,46 @@ dCdFLtBQPtFQuCdKOrpndJNUFQIDSbetUKylhSUjcDVtbiQrWMRQhAwGUZyPneCGUjGBBTkLqxLAXXtB
 KfErkDaWMFZZeuqDmXKJEGHyToPUhPphfVhgUZgbIuRAtWnroImpJKqqmEZqeNQCKzhjIkKQHURWLXFw
 PBuijeoTSpsVLaOGuLVjMZXkBvVXwUuHfBihziiavGSYofPNeKsTXruMUumRRPQJzvSzJkKbtSipiqBd'''
 
+
+inStr = "".join(inStr.split())
+
+output = ''
+
+def hasUppercaseAtLeft(str, startPos, numOfUppercase):
+    if startPos < numOfUppercase:
+        return False
+    else:
+        for i in range(1, numOfUppercase+1):
+            if str[startPos-i].islower():
+                return False
+        return True
+
+def hasExactlyUppercaseAtLeft(str, startPos, numOfUppercase):
+    if hasUppercaseAtLeft(str, startPos, numOfUppercase):
+        if startPos != numOfUppercase:
+            return str[startPos-numOfUppercase-1].islower()
+        return True
+    else:
+        return False
+
+def hasUppercaseAtRight(str, startPos, numOfUppercase):
+    if startPos > len(str)-numOfUppercase-1:
+        return False
+    else:
+        for i in range(1, numOfUppercase+1):
+            if str[startPos+i].islower():
+                return False
+        return True
+
+def hasExactlyUppercaseAtRight(str, startPos, numOfUppercase):
+    if hasUppercaseAtRight(str, startPos, numOfUppercase):
+        if startPos != len(str)-numOfUppercase-1:
+            return str[startPos+numOfUppercase+1].islower()
+        return True
+    else:
+        return False
+
+for i in range(0, len(inStr)):
+    if inStr[i].islower() and hasExactlyUppercaseAtLeft(inStr, i, 3) and hasExactlyUppercaseAtRight(inStr, i, 3):
+        output += inStr[i]
+print(output)
